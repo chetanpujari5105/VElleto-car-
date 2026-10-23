@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   VELLUTO GT design tokens. Tailwind v4 turns these into utilities:
+   bg-night, text-cream, border-gold/20, font-display, font-serif, font-mono...
+--------------------------------------------------------------------------- */
+@theme {
+  --color-night: #0d0a09;
+  --color-night-2: #15100e;
+  --color-night-3: #1f1714;
+  --color-burgundy: #7a1426;
+  --color-burgundy-bright: #a3202f;
+  --color-gold: #c9a45c;
+  --color-cream: #efe6d6;
+  --color-mute: #9a8f80;
+  --color-stone: #4a403a;
+
+  --font-display: var(--font-syncopate), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --text-hud: 0.625rem;
+  --text-hud--letter-spacing: 0.22em;
+  --text-hud--line-height: 1.5;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --spacing-gutter: clamp(1rem, 3vw, 2.5rem);
+
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-cue: cue 2.6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(239 230 214 / 0.45);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgb(239 230 214 / 0);
+    }
+  }
+
+  @keyframes cue {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    45% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    55% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-night);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-night);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-burgundy-bright);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* The giant outlined year numeral. */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(239 230 214 / 0.32);
+  }
+
+  .text-outline-gold {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(201 164 92 / 0.45);
+  }
+
+  .hairline {
+    border-color: rgb(239 230 214 / 0.1);
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
